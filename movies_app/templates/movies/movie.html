@@ -1,0 +1,33 @@
+{% extends 'common.html' %}
+{% load static %}
+
+{% block imports %}
+<link rel="stylesheet" href="{% static "styles/movies.css" %}">
+{% endblock imports %}
+
+{% block content %}
+
+    <h2 class="title">{{movie.title}}</h2>
+    <h3 class="year">{{movie.year}}</h3>
+    <img src="{{ movie.poster.url }}" alt="movie image">
+    <div class="description">{{movie.description}}</div>
+    
+    <p class="type">
+        {% for genre in movie.genres.all %}
+            <span> {{ genre }} </span>
+        {% endfor %}
+    </p>
+
+    <div class="cast">
+        {% for cast in movie.actorrole_set.all %}
+            <span> {{ cast.actor }} - {{cast.role_name}} </span>
+        {% endfor %}
+    </div>
+    
+    <div class="ratings">
+        {% for rating_data in movie.movierating_set.all %}
+            <span> {{ rating_data.rating }} - {{ rating_data.point }} </span>
+        {% endfor %}
+    </div>
+    
+{% endblock content %}

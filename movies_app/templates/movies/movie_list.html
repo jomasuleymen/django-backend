@@ -1,0 +1,12 @@
+{% extends 'common.html' %}
+{% load static %}
+
+{% load movie_tag %}
+
+{% block imports %}
+    <link rel="stylesheet" href="{% static 'styles/movies.css' %}">
+{% endblock imports %} 
+ 
+{% block content %}
+    {% show_movies category_slug %}
+{% endblock content %}
