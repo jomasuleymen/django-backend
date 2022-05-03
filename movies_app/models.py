@@ -10,16 +10,17 @@ class Movie(models.Model):
     description = models.TextField(max_length=3000)
     poster = models.ImageField(upload_to="images/movies")
     year = models.PositiveSmallIntegerField(default=2021)
-    
-    directors = models.ManyToManyField('Actor', related_name='director_movies')
-    actors = models.ManyToManyField('Actor', through='ActorRole', related_name='actors_movies')
+
+    directors = models.ManyToManyField('Director', related_name='director_movies')
+    actors = models.ManyToManyField(
+        'Actor', through='ActorRole', related_name='actors_movies')
     genres = models.ManyToManyField('Genre', related_name='movies')
-    ratings = models.ManyToManyField('Rating', through='MovieRating', related_name='movies')
+    ratings = models.ManyToManyField(
+        'Rating', through='MovieRating', related_name='movies')
     # category = models.ForeignKey('Category', related_name='movies', null=True, on_delete=models.CASCADE)
-    
+
     country = models.CharField(max_length=50)
     slug = models.SlugField(max_length=255, unique=True, db_index=True)
-
 
     def get_absolute_url(self):
         return reverse("movies:movie", kwargs={"movie_slug": self.slug})
@@ -31,7 +32,7 @@ class Movie(models.Model):
 class MovieShots(models.Model):
     image = models.ImageField(upload_to="images/movie_shots")
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
-    
+
 
 class Category(models.Model):
     name = models.CharField('Category', unique=True, max_length=150)
@@ -39,7 +40,6 @@ class Category(models.Model):
 
     def get_absolute_url(self):
         return reverse("movies:category", kwargs={"category_slug": self.slug})
-
 
     def __str__(self) -> str:
         return self.name
@@ -61,14 +61,23 @@ class Genre(models.Model):
 
 
 class Actor(models.Model):
-    """" Actors and directors """
+    """" Actors """
 
     image = models.ImageField(upload_to='images/actors')
-    firstname = models.CharField(max_length=120)
-    lastname = models.CharField(max_length=120)
+    fullname = models.CharField(max_length=120)
 
     def __str__(self) -> str:
-        return f"{self.firstname} {self.lastname}"
+        return self.fullname
+
+
+class Director(models.Model):
+    """" directors """
+
+    image = models.ImageField(upload_to='images/directors')
+    fullname = models.CharField(max_length=120)
+
+    def __str__(self) -> str:
+        return self.fullname
 
 
 class Rating(models.Model):
@@ -97,7 +106,7 @@ class Profile(models.Model):
 
     phone = models.CharField(unique=True,
                              max_length=25, null=True, blank=False)
-    
+
     birthdate = models.DateField(null=True)
 
     is_confirmed = models.BooleanField(default=False)

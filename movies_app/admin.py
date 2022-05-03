@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import *
 
+
 class ActorRoleAdmin(admin.TabularInline):
     model = ActorRole
 
@@ -13,6 +14,7 @@ class MovieRatingAdmin(admin.TabularInline):
 class RatingAdmin(admin.ModelAdmin):
     pass
 
+
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
     list_display = ('user', 'phone', 'is_confirmed')
@@ -20,6 +22,11 @@ class ProfileAdmin(admin.ModelAdmin):
 
 @admin.register(Actor)
 class ActorAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(Director)
+class DirectorAdmin(admin.ModelAdmin):
     pass
 
 

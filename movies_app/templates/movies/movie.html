@@ -2,32 +2,142 @@
 {% load static %}
 
 {% block imports %}
-<link rel="stylesheet" href="{% static "styles/movies.css" %}">
+<link rel="stylesheet" href="{% static "styles/movie.css" %}">
 {% endblock imports %}
 
 {% block content %}
 
-    <h2 class="title">{{movie.title}}</h2>
-    <h3 class="year">{{movie.year}}</h3>
-    <img src="{{ movie.poster.url }}" alt="movie image">
-    <div class="description">{{movie.description}}</div>
-    
-    <p class="type">
-        {% for genre in movie.genres.all %}
-            <span> {{ genre }} </span>
-        {% endfor %}
-    </p>
+<iframe id="trailer"
+    src="//www.youtube.com/embed/1UbTnTS3rjY?autoplay=1&mute=1&rel=0&modestbranding=0&autohide=1&showinfo=0&controls=0&loop=1"
+    title="Trailer" frameborder="0" allow="autoplay loop"></iframe>
 
-    <div class="cast">
-        {% for cast in movie.actorrole_set.all %}
+<div class="info">
+
+    <div class="general-info">
+        <img src="{{ movie.poster.url }}" alt="movie image">
+        <div class="infos">
+
+            <div class="ratings">
+                {% for rating_data in movie.movierating_set.all %}
+                <span> {{ rating_data.rating }} - {{ rating_data.point }} </span>
+                {% endfor %}
+            </div>
+
+            <h2 class="title">{{movie.title}}</h2>
+        </div>
+    </div>
+
+    <div class="about">
+        <h3 class="year">{{movie.year}}</h3>
+        <div class="description">{{movie.description}}</div>
+        <p class="type">
+            {% for genre in movie.genres.all %}
+            <span> {{ genre }} </span>
+            {% endfor %}
+        </p>
+
+        <div class="cast">
+            {% for cast in movie.actorrole_set.all %}
             <span> {{ cast.actor }} - {{cast.role_name}} </span>
-        {% endfor %}
+            {% endfor %}
+        </div>
     </div>
-    
-    <div class="ratings">
-        {% for rating_data in movie.movierating_set.all %}
-            <span> {{ rating_data.rating }} - {{ rating_data.point }} </span>
-        {% endfor %}
+
+
+</div>
+
+<h1 style="text-align: center;">Comments</h1>
+<div class="comments-section">
+    <div class="write">
+        <div class="info-user">
+            <input type="text" maxlength="35" name="name" id="name" placeholder="Ваше имя">
+            <input type="email" maxlength="35" name="mail" id="mail" placeholder="Ваш e-mail (необязательно)">
+        </div>
+        <div class="comment-input">
+            <textarea name="comment" id="comment" cols="100" rows="6" placeholder="Comment here"></textarea>
+        </div>
+        <div class="send">
+            <button type="submit">
+                Send
+            </button>
+        </div>
     </div>
-    
+    <div class="read">
+
+        <div class="per-comment">
+            <div class="user-information">
+                <h4 class="user-name">user_name</h4>
+                <div class="date">26 февраля 2022 23:38</div>
+            </div>
+            <div class="comment">
+                Помню когда купил сони плейстейшен пару месяцев назад, в комплекте было 3 игры один из них был
+                именно анчардет, бляя как же я залипал в эту игру бывало в день играл по 5-6 часов это было просто
+                потрясно, кайфовал каждую секунду, надеюсь и фильм получиться таким же классным как и игра.
+            </div>
+        </div>
+
+        <!--  -->
+        <div class="per-comment">
+            <div class="user-information">
+                <h4 class="user-name">user_name</h4>
+                <div class="date">26 февраля 2022 23:38</div>
+            </div>
+            <div class="comment">
+                Помню когда купил сони плейстейшен пару месяцев назад, в комплекте было 3 игры один из них был
+                именно анчардет, бляя как же я залипал в эту игру бывало в день играл по 5-6 часов это было просто
+                потрясно, кайфовал каждую секунду, надеюсь и фильм получиться таким же классным как и игра.
+            </div>
+        </div>
+
+        <div class="per-comment">
+            <div class="user-information">
+                <h4 class="user-name">user_name</h4>
+                <div class="date">26 февраля 2022 23:38</div>
+            </div>
+            <div class="comment">
+                Помню когда купил сони плейстейшен пару месяцев назад, в комплекте было 3 игры один из них был
+                именно анчардет, бляя как же я залипал в эту игру бывало в день играл по 5-6 часов это было просто
+                потрясно, кайфовал каждую секунду, надеюсь и фильм получиться таким же классным как и игра.
+            </div>
+        </div>
+
+        <div class="per-comment">
+            <div class="user-information">
+                <h4 class="user-name">user_name</h4>
+                <div class="date">26 февраля 2022 23:38</div>
+            </div>
+            <div class="comment">
+                Помню когда купил сони плейстейшен пару месяцев назад, в комплекте было 3 игры один из них был
+                именно анчардет, бляя как же я залипал в эту игру бывало в день играл по 5-6 часов это было просто
+                потрясно, кайфовал каждую секунду, надеюсь и фильм получиться таким же классным как и игра.
+            </div>
+        </div>
+
+        <div class="per-comment">
+            <div class="user-information">
+                <h4 class="user-name">user_name</h4>
+                <div class="date">26 февраля 2022 23:38</div>
+            </div>
+            <div class="comment">
+                Помню когда купил сони плейстейшен пару месяцев назад, в комплекте было 3 игры один из них был
+                именно анчардет, бляя как же я залипал в эту игру бывало в день играл по 5-6 часов это было просто
+                потрясно, кайфовал каждую секунду, надеюсь и фильм получиться таким же классным как и игра.
+            </div>
+        </div>
+
+        <div class="per-comment">
+            <div class="user-information">
+                <h4 class="user-name">user_name</h4>
+                <div class="date">26 февраля 2022 23:38</div>
+            </div>
+            <div class="comment">
+                Помню когда купил сони плейстейшен пару месяцев назад, в комплекте было 3 игры один из них был
+                именно анчардет, бляя как же я залипал в эту игру бывало в день играл по 5-6 часов это было просто
+                потрясно, кайфовал каждую секунду, надеюсь и фильм получиться таким же классным как и игра.
+            </div>
+        </div>
+        <!--  -->
+    </div>
+</div>
+
 {% endblock content %}
